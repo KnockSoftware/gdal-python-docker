@@ -1,8 +1,9 @@
 #!/bin/sh
-tags="3.4.9-stretch 3.5.6-stretch 3.6.7-stretch 2.7.16-stretch"
+#tags="3.4.9-stretch 3.5.6-stretch 3.6.7-stretch 3.7.3-stretch 2.7.16-stretch"
+tags="3.7.3-stretch"
 #tags="2.7.16-stretch"
-#gdals="2.3.1 2.3.2" 
-gdals="2.3.2" 
+#gdals="2.3.1 2.3.2"
+gdals="2.3.2"
 
 set -ex
 
