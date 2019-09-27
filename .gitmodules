@@ -1,0 +1,4 @@
+[submodule "ridereport-common"]
+	path = ridereport-common
+	url = git@github.com:RideReport/ridereport-common.git
+	branch = master

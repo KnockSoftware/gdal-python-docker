@@ -1,0 +1,11 @@
+repos:
+- repo: local
+  hooks:
+    - id: hadolint
+      name: hadolint
+      description: Dockerfile linter
+      language: docker_image
+      types:
+        - dockerfile
+      pass_filenames: true
+      entry: hadolint/hadolint:latest hadolint
