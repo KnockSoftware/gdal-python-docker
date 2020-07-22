@@ -8,4 +8,4 @@ RUN apt-get update && \
 # https://www.debian.org/releases/stable/amd64/release-notes/ch-information.en.html#openssl-defaults
 # TLDR: buster has tighter SSL requirements that AMZN hasn't met yet, allow a lower level:
 RUN sed -i -E -e 's/^CipherString\s+=\s+DEFAULT@SECLEVEL=2$/CipherString = DEFAULT/' /usr/lib/ssl/openssl.cnf
-RUN pip3 install pipenv==2018.11.26
+RUN pip3 install pipenv==2020.6.2
