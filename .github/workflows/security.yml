@@ -1,0 +1,44 @@
+name: Image Scan
+on:
+  schedule:
+    - cron: '0 16 * * *'
+  push: {}
+jobs:
+  check-ecr-image:
+    runs-on: ubuntu-20.04
+    environment: security-checker
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      - name: Scan Docker image
+        id: docker-scan
+        uses: alexjurkiewicz/ecr-scan-image@v1.5.0
+        with:
+          repository: gdal-python
+          tag: latest
+      - name: Slack notification
+        if: ${{ always() }}
+        uses: edge/simple-slack-notify@master
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          channel: '#alerts-security'
+          status: ${{ job.status }}
+          success_text: "No critical or high vulnerabilities found in gdal-python:latest"
+          failure_text: "Found critical vulnerabilities in gdal-python:latest"
+          cancelled_text: "Cancelled"
+          username: "ECR Image Check"
+          fields: |
+            [
+              {"title": "Critical", "value": "${{ steps.docker-scan.outputs.critical }}"},
+              {"title": "High", "value": "${{ steps.docker-scan.outputs.high }}"},
+              {"title": "Total", "value": "${{ steps.docker-scan.outputs.total }}"},
+              {"title": "URL", "value": "https://us-west-2.console.aws.amazon.com/ecr/repositories/private/209821696285/gdal-python?region=us-west-2"}
+            ]
