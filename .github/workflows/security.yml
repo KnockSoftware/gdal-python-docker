@@ -2,7 +2,9 @@ name: Image Scan
 on:
   schedule:
     - cron: '0 16 * * *'
-  push: {}
+  push:
+    branches:
+      - main
 jobs:
   check-ecr-image:
     runs-on: ubuntu-20.04
