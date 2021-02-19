@@ -25,6 +25,11 @@ jobs:
         with:
           repository: gdal-python
           tag: latest
+          # ignore kernel vulnerabilties that would fail the check
+          ignore_list: |
+            CVE-2019-19814
+            CVE-2020-29374
+            CVE-2013-7445
       - name: Slack notification
         if: ${{ always() }}
         uses: edge/simple-slack-notify@master
