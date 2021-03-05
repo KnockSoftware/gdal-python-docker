@@ -1,4 +1,4 @@
-ARG PYTHON_DOCKER_TAG=3.7.10-slim-buster
+ARG PYTHON_DOCKER_TAG=3.9.2-slim-buster
 FROM python:$PYTHON_DOCKER_TAG as base
 RUN apt-get update && \
 	mkdir -p /usr/share/man/man1 /usr/share/man/man7 && \

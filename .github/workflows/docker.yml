@@ -1,0 +1,19 @@
+name: Build Docker Image
+on:
+  schedule:
+    - cron: '0 15 * * 1'
+  pull_request: {}
+  push:
+    branches:
+      - main
+jobs:
+  build-docker-image:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Image
+        id: build
+        run: docker build . --file Dockerfile --tag baseimage
+      - name: Run Image
+        id: run
+        run: docker run --rm baseimage python --version
