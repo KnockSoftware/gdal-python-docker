@@ -1,16 +1,16 @@
 repos:
-- repo: local
+- repo: https://github.com/hadolint/hadolint
+  rev: v2.0.0
   hooks:
-    - id: hadolint
-      name: hadolint
-      description: Dockerfile linter
-      language: docker_image
-      types:
-        - dockerfile
-      pass_filenames: true
-      entry: hadolint/hadolint:latest hadolint
+  - id: hadolint-docker
+    args:
+    - --ignore
+    - DL3005
+    - --ignore
+    - DL3008
+    - "-"
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v2.3.0
+  rev: v3.4.0
   hooks:
   - id: check-yaml
 
