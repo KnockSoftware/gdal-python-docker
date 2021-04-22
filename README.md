@@ -10,9 +10,8 @@ As of April 2021, this base image is used in:
  - `blackhole` -- https://github.com/RideReport/blackhole
  - `custom-errors` -- https://github.com/RideReport/custom-errors
  - `djscoots` -- https://github.com/RideReport/djscoots
- - `mds_as_a_service` -- https://github.com/RideReport/mds_as_as_service
+ - `mds_as_a_service` -- https://github.com/RideReport/mds_as_a_service
  - `orchescooter` -- https://github.com/RideReport/orchescooter
- - `rideserver` -- https://github.com/RideReport/rideserver
  - `scootpower` -- https://github.com/RideReport/scootpower
 
 To open a PR in each of these repos with a new base image:
