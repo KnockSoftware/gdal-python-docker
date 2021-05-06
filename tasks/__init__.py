@@ -60,3 +60,16 @@ def update_repos(c, base_tag):
                     c.run("git commit -am 'Update Base Image'")
                     c.run(f"git push -u origin {branch}:{branch}")
                     c.run("gh pr create --title 'Base Docker Image Update' --body 'Latest Base Image'")
+
+@task
+def update_deps(c):
+    repos = parse_repos('./README.md')
+    with tempfile.TemporaryDirectory(dir=".") as tmpdir:
+        with cd(tmpdir):
+            for repo in repos:
+                c.run(f'gh repo clone {repo}')
+                with cd(os.path.basename(repo)):
+                    c.run("git submodule update --init")
+                    c.run("git submodule update --recursive --remote")
+                    #c.run("pre-commit install")
+                    #c.run("make updatedeps")
