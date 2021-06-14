@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+      - name: Build Bullseye Image
+        id: build
+        run: docker build -t python:3.9.5-slim-bullseye -f ./Dockerfile-bullseye-slim .
       - name: Build Image
         id: build
         run: docker build . --file Dockerfile --tag baseimage

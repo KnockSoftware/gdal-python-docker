@@ -1,9 +1,10 @@
-ARG PYTHON_DOCKER_TAG=3.9.4-slim-buster
-FROM python:$PYTHON_DOCKER_TAG as base
+ARG PYTHON_DOCKER_TAG=3.9.5-slim-bullseye
+ARG REPO=python
+FROM $REPO:$PYTHON_DOCKER_TAG as base
 RUN apt-get update && \
 	apt-get -y upgrade && \
 	mkdir -p /usr/share/man/man1 /usr/share/man/man7 && \
-        apt-get -y install --no-install-recommends git postgresql-client wget libgdal20 build-essential libpq-dev mime-support libssl1.1 libzstd1 openssl && \
+        apt-get -y install --no-install-recommends git postgresql-client wget libgdal28 build-essential libpq-dev mime-support libssl1.1 libzstd1 openssl && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
 # https://www.debian.org/releases/stable/amd64/release-notes/ch-information.en.html#openssl-defaults
